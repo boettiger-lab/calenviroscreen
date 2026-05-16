@@ -19,7 +19,7 @@ The official "Disadvantaged Community" designation under SB 535 and AB 1550 — 
 
 ## Redlining caveat
 
-`mapping-inequality` covers historical HOLC-mapped cities only (LA, SF, Oakland, San Diego, Sacramento, Stockton, Fresno). Absence from the layer does not mean absence of historical discrimination.
+`mappinginequality` covers historical HOLC-mapped cities only (LA, SF, Oakland, San Jose, San Diego, Sacramento, Stockton, Fresno). Absence from the layer does not mean absence of historical discrimination.
 
 ## Ambiguous queries
 
