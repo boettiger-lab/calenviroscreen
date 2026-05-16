@@ -1,0 +1,406 @@
+{
+    "catalog": "https://s3-west.nrp-nautilus.io/public-data/stac/catalog.json",
+    "titiler_url": "https://titiler.nrp-nautilus.io",
+    "mcp_url": "https://duckdb-mcp.nrp-nautilus.io/mcp",
+    "auto_approve": true,
+    "links": {
+        "github": "https://github.com/boettiger-lab/calenviroscreen"
+    },
+    "view": {
+        "center": [-119.5, 37.5],
+        "zoom": 6
+    },
+    "welcome": {
+        "message": "Hi! I can help you explore California environmental-justice data — pollution burden, social vulnerability, disadvantaged-community designations, and the overlap between burdened communities and conservation investment. Try asking:",
+        "examples": [
+            "Which census tracts in Alameda County are in the top 10% of CES burden, and which indicators drive the score?",
+            "Where do CalEnviroScreen high-burden tracts overlap historical redlining grades?",
+            "Which Assembly districts have the largest population living in SB 535 designated disadvantaged communities?",
+            "How does PM2.5 in Fresno County compare to Los Angeles County?",
+            "Show me Conservation Almanac sites within or adjacent to high-CES tracts — where has conservation investment reached burdened communities?",
+            "In Senate District 18, what share of residents live in tracts with both high pollution burden and high asthma rates?"
+        ]
+    },
+    "collections": [
+        {
+            "collection_id": "calenviroscreen-5-0",
+            "preload": true,
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-calenviroscreen/stac-collection.json",
+            "group": { "name": "Environmental Justice", "collapsed": false },
+            "assets": [
+                {
+                    "id": "ces5-pmtiles",
+                    "display_name": "CalEnviroScreen 5.0",
+                    "group": "Environmental Justice",
+                    "visible": true,
+                    "default_style": {
+                        "fill-color": [
+                            "interpolate", ["linear"], ["get", "CIscore_Pctl"],
+                            0,   "#1A9641",
+                            25,  "#A6D96A",
+                            50,  "#FFFFBF",
+                            75,  "#FDAE61",
+                            100, "#D7191C"
+                        ],
+                        "fill-opacity": 0.7
+                    },
+                    "outline_style": { "line-color": "#555555", "line-width": 0.5 },
+                    "tooltip_fields": ["tract", "county", "ZIP", "CIscore", "CIscore_Pctl", "Pollution_Pctl", "PopChar_Pctl"]
+                }
+            ]
+        },
+        {
+            "collection_id": "ca-dac-eda-2023",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-ca-dac/stac-collection.json",
+            "group": { "name": "Environmental Justice", "collapsed": false },
+            "assets": [
+                {
+                    "id": "dac-tract-pmtiles",
+                    "display_name": "CA Disadvantaged Communities (DWR 2023, tract)",
+                    "group": "Environmental Justice",
+                    "visible": false,
+                    "default_style": {
+                        "fill-color": [
+                            "match", ["get", "DAC23"],
+                            "Y", "#6A1B9A",
+                            "N", "rgba(0,0,0,0)",
+                            "rgba(150,150,150,0.2)"
+                        ],
+                        "fill-opacity": 0.5
+                    },
+                    "outline_style": { "line-color": "#4A148C", "line-width": 0.4 },
+                    "tooltip_fields": ["GEOID20", "DAC23", "MHI23", "Pop23"]
+                }
+            ]
+        },
+        {
+            "collection_id": "svi-2022",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-social-vulnerability/2022/stac-collection.json",
+            "group": { "name": "Environmental Justice", "collapsed": false },
+            "assets": [
+                {
+                    "id": "tract-pmtiles",
+                    "display_name": "CDC Social Vulnerability Index (tract)",
+                    "group": "Environmental Justice",
+                    "visible": false,
+                    "default_style": {
+                        "fill-color": [
+                            "interpolate", ["linear"], ["get", "RPL_THEMES"],
+                            0,    "#1A9641",
+                            0.25, "#A6D96A",
+                            0.5,  "#FFFFBF",
+                            0.75, "#FDAE61",
+                            1,    "#D7191C"
+                        ],
+                        "fill-opacity": 0.6
+                    },
+                    "outline_style": { "line-color": "#555555", "line-width": 0.3 },
+                    "default_filter": ["==", ["get", "ST_ABBR"], "CA"],
+                    "tooltip_fields": ["COUNTY", "FIPS", "RPL_THEMES", "ST_ABBR"]
+                },
+                {
+                    "id": "county-pmtiles",
+                    "display_name": "CDC Social Vulnerability Index (county)",
+                    "group": "Environmental Justice",
+                    "visible": false,
+                    "default_style": {
+                        "fill-color": [
+                            "interpolate", ["linear"], ["get", "RPL_THEMES"],
+                            0,    "#1A9641",
+                            0.25, "#A6D96A",
+                            0.5,  "#FFFFBF",
+                            0.75, "#FDAE61",
+                            1,    "#D7191C"
+                        ],
+                        "fill-opacity": 0.7
+                    },
+                    "outline_style": { "line-color": "#555555", "line-width": 0.5 },
+                    "default_filter": ["==", ["get", "ST_ABBR"], "CA"],
+                    "tooltip_fields": ["COUNTY", "FIPS", "RPL_THEMES", "ST_ABBR"]
+                }
+            ]
+        },
+        {
+            "collection_id": "mappinginequality",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-mappinginequality/stac-collection.json",
+            "group": { "name": "Environmental Justice", "collapsed": false },
+            "assets": [
+                {
+                    "id": "mappinginequality-pmtiles",
+                    "display_name": "HOLC Redlining Grades (1930s)",
+                    "group": "Environmental Justice",
+                    "visible": false,
+                    "default_style": {
+                        "fill-color": [
+                            "match", ["get", "grade"],
+                            "A", "#1B5E20",
+                            "B", "#1565C0",
+                            "C", "#FBC02D",
+                            "D", "#C62828",
+                            "#9E9E9E"
+                        ],
+                        "fill-opacity": 0.6
+                    },
+                    "outline_style": { "line-color": "#212121", "line-width": 0.4 },
+                    "tooltip_fields": ["city", "state", "grade", "label"]
+                }
+            ]
+        },
+        {
+            "collection_id": "census-2024-county",
+            "preload": true,
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2024/county/stac-collection.json",
+            "group": { "name": "Political Boundaries", "collapsed": false },
+            "assets": [
+                {
+                    "id": "county-pmtiles",
+                    "alias": "census-county-pmtiles",
+                    "display_name": "California Counties",
+                    "group": "Political Boundaries",
+                    "visible": true,
+                    "default_style": { "fill-color": "#00695C", "fill-opacity": 0.05 },
+                    "outline_style": { "line-color": "#00695C", "line-width": 1.5 },
+                    "default_filter": ["==", ["get", "STATEFP"], "06"],
+                    "tooltip_fields": ["NAMELSAD", "NAME", "GEOID"]
+                }
+            ]
+        },
+        {
+            "collection_id": "census-2024-cd",
+            "preload": true,
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2024/cd/stac-collection.json",
+            "group": { "name": "Political Boundaries", "collapsed": false },
+            "assets": [
+                {
+                    "id": "cd",
+                    "display_name": "Congressional Districts",
+                    "group": "Political Boundaries",
+                    "visible": false,
+                    "default_style": { "fill-color": "#1565C0", "fill-opacity": 0.05 },
+                    "outline_style": { "line-color": "#1565C0", "line-width": 1.5 },
+                    "default_filter": ["==", ["get", "STATEFP"], "06"],
+                    "tooltip_fields": ["NAMELSAD", "GEOID", "STATEFP"]
+                }
+            ]
+        },
+        {
+            "collection_id": "census-2025-sldu",
+            "preload": true,
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2025/sldu/stac-collection.json",
+            "group": { "name": "Political Boundaries", "collapsed": false },
+            "assets": [
+                {
+                    "id": "sldu-pmtiles",
+                    "display_name": "CA Senate Districts",
+                    "group": "Political Boundaries",
+                    "visible": false,
+                    "default_style": { "fill-color": "#BF360C", "fill-opacity": 0.05 },
+                    "outline_style": { "line-color": "#BF360C", "line-width": 1.5 },
+                    "default_filter": ["==", ["get", "STATEFP"], "06"],
+                    "tooltip_fields": ["NAMELSAD", "GEOID", "SLDUST"]
+                }
+            ]
+        },
+        {
+            "collection_id": "census-2025-sldl",
+            "preload": true,
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2025/sldl/stac-collection.json",
+            "group": { "name": "Political Boundaries", "collapsed": false },
+            "assets": [
+                {
+                    "id": "sldl-pmtiles",
+                    "display_name": "CA Assembly Districts",
+                    "group": "Political Boundaries",
+                    "visible": false,
+                    "default_style": { "fill-color": "#6A1B9A", "fill-opacity": 0.05 },
+                    "outline_style": { "line-color": "#6A1B9A", "line-width": 1.5 },
+                    "default_filter": ["==", ["get", "STATEFP"], "06"],
+                    "tooltip_fields": ["NAMELSAD", "GEOID", "SLDLST"]
+                }
+            ]
+        },
+        {
+            "collection_id": "conservation-almanac-2024-sites",
+            "preload": true,
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/conservation-almanac-2024-sites/stac-collection.json",
+            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
+            "assets": [
+                {
+                    "id": "conservation-almanac-2024-sites-pmtiles",
+                    "display_name": "TPL Conservation Almanac",
+                    "group": "Conservation & Equity Investments",
+                    "visible": false,
+                    "default_style": {
+                        "fill-color": [
+                            "match", ["get", "purchase_type"],
+                            "FSP", "#2E7D32",
+                            "ESM", "#1565C0",
+                            "FNE", "#6A1B9A",
+                            "OTH", "#E65100",
+                            "#9E9E9E"
+                        ],
+                        "fill-opacity": 0.6
+                    },
+                    "tooltip_fields": ["site", "owner", "owner_type", "manager", "access_type", "purchase_type", "acres", "year", "county"]
+                }
+            ]
+        },
+        {
+            "collection_id": "landvote",
+            "preload": true,
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/landvote/stac-collection.json",
+            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
+            "assets": [
+                {
+                    "id": "landvote-pmtiles",
+                    "display_name": "Conservation Ballot Measures",
+                    "group": "Conservation & Equity Investments",
+                    "visible": false,
+                    "default_filter": ["all",
+                        ["==", ["get", "state"], "CA"],
+                        ["!=", ["get", "jurisdiction"], "State"],
+                        [">=", ["get", "year"], 2010]
+                    ],
+                    "default_style": {
+                        "fill-color": [
+                            "match", ["get", "status"],
+                            "Pass",  "#1B5E20",
+                            "Pass*", "#2E7D32",
+                            "Fail",  "#C62828",
+                            "#9E9E9E"
+                        ],
+                        "fill-opacity": 0.5
+                    },
+                    "outline_style": { "line-color": "#424242", "line-width": 0.8 },
+                    "tooltip_fields": ["municipal", "county", "year", "status", "finance_mechanism", "conservation_funds_approved", "purpose"]
+                }
+            ]
+        },
+        {
+            "collection_id": "wcb-approved-projects",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/wcb-approved-projects/stac-collection.json",
+            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
+            "assets": [
+                {
+                    "id": "wcb-approved-projects-pmtiles",
+                    "display_name": "WCB Approved Projects",
+                    "group": "Conservation & Equity Investments",
+                    "visible": false,
+                    "default_style": { "fill-color": "#00695C", "fill-opacity": 0.5 },
+                    "outline_style": { "line-color": "#004D40", "line-width": 0.6 },
+                    "tooltip_fields": ["ProjName", "PrimGrante", "County", "Acres", "WCBFunding", "Type", "Program", "dtmBoardAp"]
+                }
+            ]
+        },
+        {
+            "collection_id": "cpad-units-2025b",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-cpad/cpad-units-stac-collection.json",
+            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
+            "assets": [
+                {
+                    "id": "units-pmtiles",
+                    "display_name": "CPAD Protected Areas",
+                    "group": "Conservation & Equity Investments",
+                    "visible": false,
+                    "default_style": { "fill-color": "#388E3C", "fill-opacity": 0.5 },
+                    "tooltip_fields": ["UNIT_NAME", "AGNCY_NAME", "ACCESS_TYP", "ACRES"]
+                }
+            ]
+        },
+        {
+            "collection_id": "irrecoverable-carbon",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-carbon/stac-collection.json",
+            "group": { "name": "Environmental Co-benefits", "collapsed": true },
+            "assets": [
+                {
+                    "id": "v2-irrecoverable-2024-cog",
+                    "display_name": "Irrecoverable Carbon (2024)",
+                    "group": "Environmental Co-benefits",
+                    "visible": false,
+                    "colormap": "reds",
+                    "rescale": "0,150"
+                }
+            ]
+        },
+        {
+            "collection_id": "calfire-2024-firep",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-fire/calfire-2024/firep/stac-collection.json",
+            "group": { "name": "Environmental Co-benefits", "collapsed": true },
+            "assets": [
+                {
+                    "id": "firep-pmtiles",
+                    "display_name": "Wildfire Perimeters",
+                    "group": "Environmental Co-benefits",
+                    "visible": false,
+                    "default_filter": [">=", ["get", "YEAR_"], 2000],
+                    "default_style": {
+                        "fill-color": [
+                            "interpolate", ["linear"], ["get", "YEAR_"],
+                            2000, "#FFCCBC",
+                            2015, "#FF7043",
+                            2024, "#B71C1C"
+                        ],
+                        "fill-opacity": 0.5
+                    },
+                    "outline_style": { "line-color": "#B71C1C", "line-width": 0.5 },
+                    "tooltip_fields": ["FIRE_NAME", "YEAR_", "GIS_ACRES", "AGENCY", "CAUSE"]
+                }
+            ]
+        },
+        {
+            "collection_id": "wetlands-nwi",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-wetlands/nwi/stac-collection.json",
+            "group": { "name": "Environmental Co-benefits", "collapsed": true },
+            "assets": [
+                {
+                    "id": "nwi-pmtiles",
+                    "display_name": "NWI Wetlands",
+                    "group": "Environmental Co-benefits",
+                    "visible": false,
+                    "default_style": {
+                        "fill-color": [
+                            "match", ["get", "WETLAND_TYPE"],
+                            "Freshwater Emergent Wetland",        "#7CCD7C",
+                            "Freshwater Forested/Shrub Wetland",  "#008000",
+                            "Freshwater Pond",                    "#2980B9",
+                            "Lake",                               "#1F77B4",
+                            "Lakes",                              "#1F77B4",
+                            "Riverine",                           "#0099CC",
+                            "Estuarine and Marine Wetland",       "#FF7F00",
+                            "Estuarine and Marine Deepwater",     "#0F0F73",
+                            "#9E9E9E"
+                        ],
+                        "fill-opacity": 0.6
+                    },
+                    "outline_style": { "line-color": "#333333", "line-width": 0.3, "line-opacity": 0.5 },
+                    "tooltip_fields": ["WETLAND_TYPE", "ATTRIBUTE", "state_code"]
+                }
+            ]
+        },
+        {
+            "collection_id": "usfws-critical-habitat-final",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-usfws/critical-habitat/final/stac-collection.json",
+            "group": { "name": "Environmental Co-benefits", "collapsed": true },
+            "assets": [
+                {
+                    "id": "final-pmtiles",
+                    "display_name": "USFWS Critical Habitat",
+                    "group": "Environmental Co-benefits",
+                    "visible": false,
+                    "default_style": {
+                        "fill-color": [
+                            "match", ["get", "listing_st"],
+                            "Endangered",  "#B71C1C",
+                            "Threatened",  "#EF6C00",
+                            "Extinction",  "#424242",
+                            "#9E9E9E"
+                        ],
+                        "fill-opacity": 0.5
+                    },
+                    "outline_style": { "line-color": "#7F0000", "line-width": 0.4 },
+                    "tooltip_fields": ["comname", "sciname", "listing_st", "unitname", "status", "pubdate"]
+                }
+            ]
+        }
+    ]
+}
