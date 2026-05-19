@@ -36,6 +36,7 @@ spec:
         - |
           git clone --depth 1 https://github.com/boettiger-lab/calenviroscreen.git /tmp/repo
           cp /tmp/repo/index.html /usr/share/nginx/html/
+          cp /tmp/repo/about.html /usr/share/nginx/html/
           cp /tmp/repo/layers-input.json /usr/share/nginx/html/
           cp /tmp/repo/system-prompt.md /usr/share/nginx/html/
         volumeMounts:

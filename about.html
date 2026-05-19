@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — CalEnviroScreen Environmental Justice Explorer</title>
+<style>
+:root {
+    --ink: #1a2330;
+    --ink-soft: #4a5566;
+    --paper: #fafaf7;
+    --rule: #e0e3dc;
+    --accent: #00695C;
+    --accent-dark: #004D40;
+    --accent-soft: #E0F2F1;
+    --link: #1565c0;
+    --code-bg: #1e2a35;
+    --code-ink: #e6edf3;
+    --max: 880px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+header.hero {
+    background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+    color: #fff;
+    padding: 3.5rem 1.5rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+}
+.hero-inner { max-width: var(--max); margin: 0 auto; }
+.hero h1 {
+    font-size: 2.1rem;
+    margin: 0 0 0.4rem 0;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+.hero .tag {
+    font-size: 1.05rem;
+    opacity: 0.92;
+    margin: 0 0 1.4rem 0;
+    max-width: 60ch;
+}
+.hero .cta {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 0.55rem 1.1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.35);
+    font-weight: 500;
+    transition: background 0.15s;
+}
+.hero .cta:hover { background: rgba(255,255,255,0.28); text-decoration: none; }
+.hero .badge {
+    display: inline-block;
+    margin-left: 0.6rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.18);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+}
+
+main {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+}
+
+section { margin-bottom: 2.8rem; }
+
+h2 {
+    font-size: 1.45rem;
+    color: var(--accent-dark);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 0.4rem;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+}
+h3 {
+    font-size: 1.12rem;
+    color: var(--ink);
+    margin: 1.4rem 0 0.5rem 0;
+    font-weight: 600;
+}
+p { margin: 0.5rem 0 0.9rem; }
+p.lede { font-size: 1.05rem; color: var(--ink-soft); }
+
+.layer-group {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 0.9rem 0;
+}
+.layer-group h3 {
+    margin-top: 0;
+    color: var(--accent-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.layer-group h3::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 1.1em;
+    background: var(--accent);
+    border-radius: 2px;
+}
+.layer {
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--rule);
+}
+.layer:first-of-type { border-top: 0; padding-top: 0; }
+.layer .name { font-weight: 600; color: var(--ink); }
+.layer .source {
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+    margin: 0.1rem 0 0.15rem;
+}
+.layer .links { font-size: 0.88rem; }
+.layer .links a { margin-right: 0.9rem; }
+
+.callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1rem 0;
+    font-size: 0.97rem;
+}
+
+pre.sql {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 1rem 1.15rem;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    overflow-x: auto;
+    line-height: 1.5;
+    margin: 0.9rem 0;
+}
+code.inline {
+    background: #eef1ee;
+    padding: 0.08em 0.36em;
+    border-radius: 3px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.92em;
+}
+
+.foot {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+}
+.foot .partners {
+    display: flex;
+    justify-content: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+    margin: 0.6rem 0 1rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+@media (max-width: 600px) {
+    .hero h1 { font-size: 1.6rem; }
+    main { padding: 1.5rem 1rem 3rem; }
+    h2 { font-size: 1.2rem; }
+    pre.sql { font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="hero-inner">
+        <h1>CalEnviroScreen Environmental Justice Explorer
+            <span class="badge">work in progress</span>
+        </h1>
+        <p class="tag">An interactive map and AI assistant for exploring pollution burden, social vulnerability, and disadvantaged-community designations across California — and the places where conservation investment overlaps with environmentally burdened communities.</p>
+        <a href="/" class="cta">← Open the App</a>
+    </div>
+</header>
+
+<main>
+
+<section>
+    <h2>About this project</h2>
+    <p class="lede">A research collaboration at the <a href="https://espm.berkeley.edu" target="_blank" rel="noopener">Department of Environmental Science, Policy, and Management at UC Berkeley</a>, in partnership with the <a href="https://www.tpl.org" target="_blank" rel="noopener">Trust for Public Land</a> and with support from <a href="https://www.nasa.gov" target="_blank" rel="noopener">NASA</a>.</p>
+    <p>This app helps California environmental-justice advocates, community organizations, and policymakers explore where pollution burden falls most heavily, which communities are formally designated as disadvantaged, and how conservation investment intersects with environmentally burdened places. The interface lets you toggle 16 geospatial layers and ask plain-English questions that translate into live SQL queries against a federated catalog of cloud-native datasets.</p>
+    <p>This is a <strong>work in progress</strong> built on draft <a href="https://oehha.ca.gov/calenviroscreen" target="_blank" rel="noopener">CalEnviroScreen 5.0</a> (released January 2026 by OEHHA). Final scores from OEHHA may shift during finalization.</p>
+</section>
+
+<section>
+    <h2>How it works</h2>
+    <p>The map renders open geospatial datasets directly from cloud-native formats — vector tiles (<a href="https://docs.protomaps.com/pmtiles/" target="_blank" rel="noopener">PMTiles</a>), Cloud-Optimized GeoTIFFs, and <a href="https://geoparquet.org" target="_blank" rel="noopener">GeoParquet</a> — hosted on the <a href="https://nrp.ai" target="_blank" rel="noopener">National Research Platform</a>. No tile server is involved; your browser fetches only the bytes needed for the current view.</p>
+    <p>The chat assistant translates plain-English questions into <a href="https://duckdb.org" target="_blank" rel="noopener">DuckDB</a> SQL over the same Parquet files. Dataset descriptions and column schemas are discovered automatically through a <a href="https://stacspec.org" target="_blank" rel="noopener">SpatioTemporal Asset Catalog (STAC)</a>, so the assistant sees the same column definitions you do.</p>
+
+    <div class="callout">
+        <strong>Open models on shared infrastructure.</strong> The assistant is powered by open-weight large language models (GLM-4.7, Qwen3, GPT-OSS 120B, Kimi K2.5, MiniMax M2.5) running on the <strong>NRP open-llm-proxy</strong>, a university inference service on hardware powered substantially by renewable energy. Compared with large commercial inference services, this approach reduces both the energy and the data-privacy footprint of every conversation. Carbon and energy use are tracked on our companion <a href="https://carbon-dashboard.nrp-nautilus.io" target="_blank" rel="noopener">sustainability dashboard</a>.
+    </div>
+
+    <p>The full agent stack — map, chat, MCP tool server, and STAC catalog — is open-source. See the <a href="https://github.com/boettiger-lab/calenviroscreen" target="_blank" rel="noopener">project repository</a> and the <a href="https://github.com/boettiger-lab/geo-agent" target="_blank" rel="noopener">geo-agent core library</a>.</p>
+</section>
+
+<section>
+    <h2>Transparent, reproducible queries</h2>
+    <p>Every chat answer shows the SQL the assistant ran. The same query can be copied into <a href="https://duckdb.org" target="_blank" rel="noopener">DuckDB</a>, <a href="https://shell.duckdb.org" target="_blank" rel="noopener">the DuckDB web shell</a>, R, Python, or any tool that reads Parquet over HTTPS — no API keys, no signup, no rate limits. The Parquet files are public.</p>
+
+    <p>For example, an assistant answer to <em>"Which census tracts in Alameda County are in the top 10% of CES burden, and which indicators drive the score?"</em> might run:</p>
+
+<pre class="sql">INSTALL httpfs; LOAD httpfs;
+
+SELECT tract, county, AppoxLoc,
+       CIscore, CIscore_Pctl,
+       AirPM25_Pctl, DieselPM_Pctl, DrinkingWater_Pctl,
+       Asthma_Pctl, Poverty_Pctl
+FROM read_parquet(
+    'https://s3-west.nrp-nautilus.io/public-calenviroscreen/calenviroscreen-5-0/ces5.parquet'
+)
+WHERE county = 'Alameda'
+  AND CIscore_Pctl &gt;= 90
+ORDER BY CIscore_Pctl DESC;</pre>
+
+    <p>Paste that query into DuckDB and you get the same answer, with the same provenance, today and three years from now. No screenshot, no PDF export — just the question, the SQL, and the data.</p>
+</section>
+
+<section>
+    <h2>Expanding queries</h2>
+    <p>The assistant's queries are starting points, not endpoints. Three patterns that work well:</p>
+
+    <h3>1. Change the filter</h3>
+    <p>The first query found the top 10% of tracts in Alameda County. Swap <code class="inline">county = 'Alameda'</code> for a different county, or drop the county filter and add <code class="inline">AND Pop23 &gt; 5000</code> to surface populous burdened tracts statewide. Every column and threshold is documented in the <a href="https://data.ca.gov/dataset/calenviroscreen-5-0" target="_blank" rel="noopener">CES data dictionary</a>.</p>
+
+    <h3>2. Join layers spatially</h3>
+    <p>Each layer is a separate Parquet. DuckDB's <code class="inline">spatial</code> extension joins them in-place — no download, no PostGIS:</p>
+
+<pre class="sql">INSTALL spatial; LOAD spatial;
+INSTALL httpfs;  LOAD httpfs;
+
+-- Which Assembly districts contain the most high-CES population?
+SELECT a.NAMELSAD AS district,
+       SUM(c.Population) FILTER (WHERE c.CIscore_Pctl &gt;= 90) AS high_burden_pop,
+       SUM(c.Population) AS total_pop
+FROM read_parquet('https://s3-west.nrp-nautilus.io/public-calenviroscreen/calenviroscreen-5-0/ces5.parquet') c
+JOIN read_parquet('https://s3-west.nrp-nautilus.io/public-census/census-2025/sldl/sldl.parquet') a
+  ON ST_Intersects(c.geometry, a.geometry)
+WHERE a.STATEFP = '06'
+GROUP BY a.NAMELSAD
+ORDER BY high_burden_pop DESC NULLS LAST
+LIMIT 20;</pre>
+
+    <h3>3. Switch to the H3 hex tiles for fast aggregation</h3>
+    <p>Most datasets are also published as <a href="https://h3geo.org" target="_blank" rel="noopener">H3 hexagon</a> Parquet files partitioned by resolution-0 cell. Joins on hex ID are 10–100× faster than geometric joins for nationwide aggregation. Each STAC collection lists its hex asset alongside the polygon Parquet.</p>
+
+    <div class="callout">
+        <strong>Tip:</strong> Ask the assistant to "rewrite that query using the H3 hex tiles," or to "show me the same thing for Imperial County." It will adapt the SQL — and you can always paste the final version into your own DuckDB session for further exploration.
+    </div>
+</section>
+
+<section>
+    <h2>Data layers &amp; sources</h2>
+    <p>Every layer in the app draws from a public, primary source. Click <strong>STAC</strong> beside any entry to see the full machine-readable metadata — schemas, column descriptions, license, lineage, and download URLs. Click <strong>Source</strong> to visit the original provider.</p>
+
+    <div class="layer-group">
+        <h3>Environmental Justice</h3>
+        <div class="layer">
+            <div class="name">CalEnviroScreen 5.0 (Draft, January 2026)</div>
+            <div class="source">California EPA, Office of Environmental Health Hazard Assessment (OEHHA) — cumulative pollution and population-vulnerability screening across all 9,106 California census tracts. 12 pollution-burden indicators × 9 population-characteristics indicators.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-calenviroscreen/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://oehha.ca.gov/calenviroscreen" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">CA Disadvantaged Communities &amp; Economically Distressed Areas (2023)</div>
+            <div class="source">California Department of Water Resources — official DAC designation under Water Code §79505.5(a) (MHI &lt; 80% of statewide), used for state water-funding eligibility and SB 535 / AB 1550 cap-and-trade allocations.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-ca-dac/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://data.cnra.ca.gov/dataset/dac-2023" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">CDC Social Vulnerability Index (SVI 2022)</div>
+            <div class="source">CDC / Agency for Toxic Substances and Disease Registry — county- and tract-level vulnerability composite from 16 census variables across socioeconomic status, household composition, race/ethnicity/language, and housing/transportation.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-social-vulnerability/2022/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://www.atsdr.cdc.gov/place-health/php/svi/" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">Mapping Inequality: HOLC Redlining Grades (1930s)</div>
+            <div class="source">Digital Scholarship Lab, University of Richmond (Nelson, Winling, Marciano, Connolly, et al.) — Home Owners' Loan Corporation neighborhood security grades (A "Best" through D "Hazardous"). Coverage in California: Los Angeles, San Francisco, Oakland, San Jose, San Diego, Sacramento, Stockton, Fresno.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-mappinginequality/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://dsl.richmond.edu/panorama/redlining/" target="_blank" rel="noopener">Source</a></div>
+        </div>
+    </div>
+
+    <div class="layer-group">
+        <h3>Political Boundaries</h3>
+        <div class="layer">
+            <div class="name">California Counties (2024 TIGER/Line)</div>
+            <div class="source">US Census Bureau — county and county-equivalent boundaries for California, 2024 vintage.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-census/census-2024/county/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">Congressional, Assembly &amp; Senate Districts</div>
+            <div class="source">US Census Bureau TIGER/Line — 119th Congress districts (2024) and California State Legislative Districts (2025: SLDL for Assembly, SLDU for Senate).</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-census/census-2024/cd/stac-collection.json" target="_blank" rel="noopener">STAC: CD</a><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-census/census-2025/sldl/stac-collection.json" target="_blank" rel="noopener">STAC: Assembly</a><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-census/census-2025/sldu/stac-collection.json" target="_blank" rel="noopener">STAC: Senate</a><a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html" target="_blank" rel="noopener">Source</a></div>
+        </div>
+    </div>
+
+    <div class="layer-group">
+        <h3>Conservation &amp; Equity Investments</h3>
+        <div class="layer">
+            <div class="name">TPL Conservation Almanac</div>
+            <div class="source">Trust for Public Land — record of conservation acquisitions and easements with funding source and program attribution. Includes federal, state, local, and private funding.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-tpl/conservation-almanac-2024-sites/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://www.tpl.org/conservation-almanac" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">LandVote — Conservation Ballot Measures</div>
+            <div class="source">Trust for Public Land LandVote database — every state and local conservation finance measure put to voters since 1988.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-tpl/landvote/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://landvote.org" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">WCB Approved Projects</div>
+            <div class="source">California Wildlife Conservation Board — all WCB-funded acquisitions, easements, and grants since 1949 (CDFW BIOS dataset ds672).</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-tpl/wcb-approved-projects/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://wcb.ca.gov" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">California Protected Areas (CPAD Units 2025b)</div>
+            <div class="source">California Protected Areas Database, maintained by GreenInfo Network — inventory of parks, preserves, and other open-space lands.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-cpad/cpad-units-stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://www.calands.org" target="_blank" rel="noopener">Source</a></div>
+        </div>
+    </div>
+
+    <div class="layer-group">
+        <h3>Environmental Co-benefits</h3>
+        <div class="layer">
+            <div class="name">Irrecoverable Carbon (2024)</div>
+            <div class="source">The Nature Conservancy &amp; Conservation International (Noon et al., <em>Nature Sustainability</em> 2022) — ecosystem carbon stocks that, if lost, cannot be recovered by 2050.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-carbon/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://www.conservation.org/projects/irrecoverable-carbon" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">CAL FIRE Wildfire Perimeters (2024)</div>
+            <div class="source">CAL FIRE Fire and Resource Assessment Program (FRAP) — official California fire history of perimeters, 2024 release. Smoke exposure is a major EJ concern in fire-adjacent communities.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-fire/calfire-2024/firep/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://frap.fire.ca.gov" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">NWI Wetlands</div>
+            <div class="source">US Fish &amp; Wildlife Service National Wetlands Inventory — comprehensive map of wetland types across the United States, supporting nature-based co-benefits analysis.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-wetlands/nwi/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://www.fws.gov/program/national-wetlands-inventory" target="_blank" rel="noopener">Source</a></div>
+        </div>
+        <div class="layer">
+            <div class="name">USFWS Critical Habitat (Final)</div>
+            <div class="source">US Fish &amp; Wildlife Service — final designated critical habitat under the Endangered Species Act. Useful for identifying biodiversity co-benefits of EJ-aligned conservation.</div>
+            <div class="links"><a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-usfws/critical-habitat/final/stac-collection.json" target="_blank" rel="noopener">STAC</a><a href="https://www.fws.gov/program/endangered-species/critical-habitat" target="_blank" rel="noopener">Source</a></div>
+        </div>
+    </div>
+
+    <p style="margin-top: 1.6rem;">Browse the full STAC catalog at <a href="https://radiantearth.github.io/stac-browser/#/external/s3-west.nrp-nautilus.io/public-data/stac/catalog.json" target="_blank" rel="noopener">radiantearth.github.io / stac-browser</a> to explore additional datasets not yet enabled in the app.</p>
+</section>
+
+<div class="foot">
+    <div class="partners">
+        <span>UC Berkeley</span>
+        <span>Trust for Public Land</span>
+        <span>NASA</span>
+    </div>
+    <div>Built by the <a href="https://github.com/boettiger-lab" target="_blank" rel="noopener">Boettiger Lab</a> at UC Berkeley · <a href="https://github.com/boettiger-lab/calenviroscreen" target="_blank" rel="noopener">Source on GitHub</a></div>
+    <div style="margin-top:0.4rem;">A work in progress — feedback welcome via <a href="https://github.com/boettiger-lab/calenviroscreen/issues" target="_blank" rel="noopener">GitHub issues</a>.</div>
+</div>
+
+</main>
+
+</body>
+</html>

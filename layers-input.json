@@ -5,6 +5,7 @@
     "auto_approve": true,
     "links": {
         "github": "https://github.com/boettiger-lab/calenviroscreen",
+        "docs": "/about.html",
         "carbon": true
     },
     "view": {
