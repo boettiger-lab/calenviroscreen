@@ -13,14 +13,14 @@
         "zoom": 6
     },
     "welcome": {
-        "message": "Hi! I can help you explore California environmental-justice data — pollution burden, social vulnerability, disadvantaged-community designations, and the overlap between burdened communities and conservation investment. Try asking:",
+        "message": "Hi! For pollution-burden basics, the official OEHHA viewer already does that well. What this tool adds is the ability to put CalEnviroScreen in conversation with conservation, biodiversity, carbon, fire, and wetland data — to find intersections between environmental burden and environmental co-benefits. Try asking:",
         "examples": [
-            "Which census tracts in Alameda County are in the top 10% of CES burden, and which indicators drive the score?",
-            "Where do CalEnviroScreen high-burden tracts overlap historical redlining grades?",
-            "Which Assembly districts have the largest population living in SB 535 designated disadvantaged communities?",
-            "How does PM2.5 in Fresno County compare to Los Angeles County?",
-            "Show me Conservation Almanac sites within or adjacent to high-CES tracts — where has conservation investment reached burdened communities?",
-            "In Senate District 18, what share of residents live in tracts with both high pollution burden and high asthma rates?"
+            "Where do California's irrecoverable-carbon hotspots overlap with high-CES tracts — places where climate stewardship and EJ goals align?",
+            "Which CES tracts have been burned by CAL FIRE wildfires since 2015, and how does burned acreage compare across CES burden quintiles?",
+            "Where do USFWS critical-habitat designations overlap high-CES tracts — opportunities for multi-benefit conservation?",
+            "Show NWI wetlands within or adjacent to high-CES tracts in the Central Valley — candidate sites for nature-based restoration in burdened communities.",
+            "How does Conservation Almanac investment per capita compare across CES burden quintiles — has conservation funding reached burdened communities?",
+            "Which Assembly districts contain both high-CES tracts and successful conservation ballot measures (LandVote) since 2010?"
         ]
     },
     "collections": [
