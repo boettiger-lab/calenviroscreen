@@ -4,7 +4,8 @@
     "mcp_url": "https://duckdb-mcp.nrp-nautilus.io/mcp",
     "auto_approve": true,
     "links": {
-        "github": "https://github.com/boettiger-lab/calenviroscreen"
+        "github": "https://github.com/boettiger-lab/calenviroscreen",
+        "carbon": true
     },
     "view": {
         "center": [-119.5, 37.5],
@@ -157,7 +158,7 @@
                     "alias": "census-county-pmtiles",
                     "display_name": "California Counties",
                     "group": "Political Boundaries",
-                    "visible": true,
+                    "visible": false,
                     "default_style": { "fill-color": "#00695C", "fill-opacity": 0.05 },
                     "outline_style": { "line-color": "#00695C", "line-width": 1.5 },
                     "default_filter": ["==", ["get", "STATEFP"], "06"],
