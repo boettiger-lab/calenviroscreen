@@ -12,15 +12,15 @@ data:
   config.template.json: |
     {
         "mcp_server_url": "${MCP_SERVER_URL}",
-        "llm_model": "glm-5",
+        "llm_model": "minimax-m2",
         "llm_models": [
             { "value": "glm-5",        "label": "NRP GLM-5",          "endpoint": "/api/llm", "api_key": "unused" },
             { "value": "nemotron",     "label": "DSE Nemotron",       "endpoint": "/api/llm", "api_key": "unused" },
             { "value": "qwen3",        "label": "NRP Qwen3",          "endpoint": "/api/llm", "api_key": "unused" },
             { "value": "qwen3-small",  "label": "NRP Qwen3 Small",    "endpoint": "/api/llm", "api_key": "unused" },
             { "value": "gpt-oss",      "label": "NRP GPT-OSS 120B",   "endpoint": "/api/llm", "api_key": "unused" },
-            { "value": "kimi",         "label": "NRP Kimi K2.5",      "endpoint": "/api/llm", "api_key": "unused" },
-            { "value": "minimax-m2",   "label": "NRP MiniMax M2.5",   "endpoint": "/api/llm", "api_key": "unused" }
+            { "value": "kimi",         "label": "NRP Kimi K2.6",      "endpoint": "/api/llm", "api_key": "unused" },
+            { "value": "minimax-m2",   "label": "NRP MiniMax M2",   "endpoint": "/api/llm", "api_key": "unused" }
         ]
     }
 
