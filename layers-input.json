@@ -13,14 +13,15 @@
         "zoom": 6
     },
     "welcome": {
-        "message": "Hi! For pollution-burden basics, the official OEHHA viewer already does that well. What this tool adds is the ability to put CalEnviroScreen in conversation with conservation, biodiversity, carbon, fire, and wetland data — to find intersections between environmental burden and environmental co-benefits. Try asking:",
+        "message": "Hi! Start simple — re-color, filter, or zoom the map by clicking a quick example below. Then dig deeper into intersections between environmental burden and environmental co-benefits (carbon, fire, biodiversity, wetlands) — the kind of question the official OEHHA viewer doesn't answer.",
         "examples": [
+            "Re-color CalEnviroScreen by PM2.5 percentile to see where air pollution is worst.",
+            "Filter CalEnviroScreen to the top 10% of tracts for asthma ER visits.",
+            "Zoom to Fresno County.",
             "Where do California's irrecoverable-carbon hotspots overlap with high-CES tracts — places where climate stewardship and EJ goals align?",
             "Which CES tracts have been burned by CAL FIRE wildfires since 2015, and how does burned acreage compare across CES burden quintiles?",
             "Where do USFWS critical-habitat designations overlap high-CES tracts — opportunities for multi-benefit conservation?",
-            "Show NWI wetlands within or adjacent to high-CES tracts in the Central Valley — candidate sites for nature-based restoration in burdened communities.",
-            "How does Conservation Almanac investment per capita compare across CES burden quintiles — has conservation funding reached burdened communities?",
-            "Which Assembly districts contain both high-CES tracts and successful conservation ballot measures (LandVote) since 2010?"
+            "Show NWI wetlands within or adjacent to high-CES tracts in the Central Valley — candidate sites for nature-based restoration in burdened communities."
         ]
     },
     "collections": [
