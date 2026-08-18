@@ -8,6 +8,10 @@
         "docs": "/about.html",
         "carbon": true
     },
+    "sidebar": {
+        "enabled": true,
+        "chat_title": "CalEnviroScreen Assistant"
+    },
     "view": {
         "center": [-119.5, 37.5],
         "zoom": 6
