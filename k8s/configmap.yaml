@@ -15,6 +15,8 @@ data:
         "llm_model": "deepseek-v4-flash",
         "llm_models": [
             { "value": "deepseek-v4-flash", "label": "NRP DeepSeek V4 Flash", "endpoint": "/api/llm", "api_key": "unused" },
+            { "value": "xiaomi/mimo-v2.6-pro", "label": "MiMo V2.6 Pro (OpenRouter)", "endpoint": "/api/llm", "api_key": "unused" },
+            { "value": "xiaomi/mimo-v2.6-flash", "label": "MiMo V2.6 Flash (OpenRouter)", "endpoint": "/api/llm", "api_key": "unused" },
             { "value": "glm-5",        "label": "NRP GLM-5",          "endpoint": "/api/llm", "api_key": "unused" },
             { "value": "qwen3",        "label": "NRP Qwen3",          "endpoint": "/api/llm", "api_key": "unused" },
             { "value": "qwen3-small",  "label": "NRP Qwen3 Small",    "endpoint": "/api/llm", "api_key": "unused" },
