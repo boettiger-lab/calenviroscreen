@@ -10,6 +10,6 @@ the underlying GeoParquet datasets via a DuckDB MCP server, so users can ask que
 in plain English about pollution burden, demographics, district-level CES summaries,
 and the overlap between burdened communities and conservation investments.
 
-Built on the [boettiger-lab/geo-agent](https://github.com/boettiger-lab/geo-agent)
+Built on the [SchmidtDSE/glen](https://github.com/SchmidtDSE/glen)
 framework. Configuration lives in three files: `layers-input.json`,
 `system-prompt.md`, and `index.html`.
