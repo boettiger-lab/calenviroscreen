@@ -35,6 +35,21 @@ metadata:
   name: calenviroscreen-nginx
 data:
   nginx.conf.template: |
+    # ── Per-client limits on the LLM and MCP paths (glen-ops#246) ──
+    # $client_addr is the last X-Forwarded-For entry, the one HAProxy appends
+    # from the connection it actually received, so a client cannot choose it by
+    # sending its own header. In-cluster callers have no XFF and fall back to
+    # $remote_addr. Values from proxy-log measurements (glen-template#50).
+    map $http_x_forwarded_for $client_addr {
+        "~(?:^|,)\s*(?<last>[^,\s]+)\s*$" $last;
+        default $remote_addr;
+    }
+    limit_req_zone $client_addr zone=llm:10m rate=60r/m;
+    limit_req_zone $client_addr zone=mcp:10m rate=60r/m;
+    limit_conn_zone $client_addr zone=addr:10m;
+    limit_req_status 429;
+    limit_conn_status 429;
+
     server {
         listen 80;
         server_name _;
@@ -47,13 +62,16 @@ data:
         add_header Access-Control-Allow-Headers "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Accept";
 
         location /api/llm/ {
-            proxy_pass https://open-llm-proxy.nrp-nautilus.io/v1/;
+            proxy_set_header X-Real-IP $client_addr;
+            limit_req zone=llm burst=30 nodelay;
+            limit_conn addr 20;
+            # In-cluster Service, not the public hostname (glen-ops#73), as in
+            # every other app; 600s matches the client and the proxy.
+            proxy_pass http://open-llm-proxy.biodiversity.svc.cluster.local:8002/v1/;
             proxy_set_header Authorization "Bearer ${PROXY_KEY}";
-            proxy_set_header Host open-llm-proxy.nrp-nautilus.io;
-            proxy_ssl_server_name on;
 
-            proxy_read_timeout 300s;
-            proxy_send_timeout 300s;
+            proxy_read_timeout 600s;
+            proxy_send_timeout 600s;
             proxy_buffering off;
         }
 
@@ -62,6 +80,8 @@ data:
         # so the browser never holds it, and proxies the in-cluster Service
         # rather than the public hostname (glen-ops#73).
         location /api/mcp {
+            proxy_set_header X-Real-IP $client_addr;
+            limit_req zone=mcp burst=120 nodelay;
             proxy_pass http://mcp-server-duckdb.biodiversity.svc.cluster.local:8000/mcp;
             proxy_http_version 1.1;
             proxy_set_header Host duckdb-mcp.nrp-nautilus.io;
