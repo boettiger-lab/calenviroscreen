@@ -179,7 +179,7 @@
             "group": { "name": "Political Boundaries", "collapsed": false },
             "assets": [
                 {
-                    "id": "cd",
+                    "id": "cd-pmtiles",
                     "display_name": "Congressional Districts",
                     "group": "Political Boundaries",
                     "visible": false,
