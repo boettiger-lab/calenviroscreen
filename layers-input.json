@@ -232,9 +232,7 @@
                     "id": "v2-irrecoverable-2024-cog",
                     "display_name": "Irrecoverable Carbon (2024)",
                     "group": "Environmental Co-benefits",
-                    "visible": false,
-                    "colormap": "reds",
-                    "rescale": "0,150"
+                    "visible": false
                 }
             ]
         },
