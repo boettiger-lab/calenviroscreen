@@ -237,8 +237,8 @@
             ]
         },
         {
-            "collection_id": "calfire-2024-firep",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-fire/calfire-2024/firep/stac-collection.json",
+            "collection_id": "calfire-2025-firep",
+            "collection_url": "https://s3-west.nrp-nautilus.io/public-fire/calfire-2025/firep/stac-collection.json",
             "group": { "name": "Environmental Co-benefits", "collapsed": true },
             "assets": [
                 {
