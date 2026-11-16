@@ -1,283 +1,507 @@
 {
-    "catalog": "https://s3-west.nrp-nautilus.io/public-data/stac/catalog.json",
-    "titiler_url": "https://titiler.nrp-nautilus.io",
-    "mcp_url": "https://duckdb-mcp.nrp-nautilus.io/mcp",
-    "auto_approve": true,
-    "links": {
-        "github": "https://github.com/boettiger-lab/calenviroscreen",
-        "docs": "/about.html",
-        "carbon": true
-    },
-    "sidebar": {
-        "enabled": true,
-        "chat_title": "CalEnviroScreen Assistant"
-    },
-    "view": {
-        "center": [-119.5, 37.5],
-        "zoom": 6
-    },
-    "welcome": {
-        "message": "Hi! Start simple — re-color, filter, or zoom the map by clicking a quick example below. Then dig deeper into intersections between environmental burden and environmental co-benefits (carbon, fire, biodiversity, wetlands) — the kind of question the official OEHHA viewer doesn't answer.",
-        "examples": [
-            "Re-color CalEnviroScreen by PM2.5 percentile to see where air pollution is worst.",
-            "Filter CalEnviroScreen to the top 10% of tracts for asthma ER visits.",
-            "Zoom to Fresno County.",
-            "Where do California's irrecoverable-carbon hotspots overlap with high-CES tracts — places where climate stewardship and EJ goals align?",
-            "Which CES tracts have been burned by CAL FIRE wildfires since 2015, and how does burned acreage compare across CES burden quintiles?",
-            "Where do USFWS critical-habitat designations overlap high-CES tracts — opportunities for multi-benefit conservation?",
-            "Show NWI wetlands within or adjacent to high-CES tracts in the Central Valley — candidate sites for nature-based restoration in burdened communities."
-        ]
-    },
-    "collections": [
-        {
-            "collection_id": "calenviroscreen-5-0",
-            "preload": true,
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-calenviroscreen/stac-collection.json",
-            "group": { "name": "Environmental Justice", "collapsed": false },
-            "assets": [
-                {
-                    "id": "ces5-pmtiles",
-                    "display_name": "CalEnviroScreen 5.0",
-                    "group": "Environmental Justice",
-                    "visible": true,
-                    "tooltip_fields": ["tract", "county", "ZIP", "CIscore", "CIscore_Pctl", "Pollution_Pctl", "PopChar_Pctl"]
-                }
-            ]
-        },
-        {
-            "collection_id": "ca-dac-eda-2023",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-ca-dac/stac-collection.json",
-            "group": { "name": "Environmental Justice", "collapsed": false },
-            "assets": [
-                {
-                    "id": "dac-tract-pmtiles",
-                    "display_name": "CA Disadvantaged Communities (DWR 2023, tract)",
-                    "group": "Environmental Justice",
-                    "visible": false,
-                    "tooltip_fields": ["GEOID20", "DAC23", "MHI23", "Pop23"]
-                }
-            ]
-        },
-        {
-            "collection_id": "svi-2022",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-social-vulnerability/2022/stac-collection.json",
-            "group": { "name": "Environmental Justice", "collapsed": false },
-            "assets": [
-                {
-                    "id": "tract-pmtiles",
-                    "display_name": "CDC Social Vulnerability Index (tract)",
-                    "group": "Environmental Justice",
-                    "visible": false,
-                    "default_filter": ["==", ["get", "ST_ABBR"], "CA"],
-                    "tooltip_fields": ["COUNTY", "FIPS", "RPL_THEMES", "ST_ABBR"]
-                },
-                {
-                    "id": "county-pmtiles",
-                    "display_name": "CDC Social Vulnerability Index (county)",
-                    "group": "Environmental Justice",
-                    "visible": false,
-                    "default_filter": ["==", ["get", "ST_ABBR"], "CA"],
-                    "tooltip_fields": ["COUNTY", "FIPS", "RPL_THEMES", "ST_ABBR"]
-                }
-            ]
-        },
-        {
-            "collection_id": "mappinginequality",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-mappinginequality/stac-collection.json",
-            "group": { "name": "Environmental Justice", "collapsed": false },
-            "assets": [
-                {
-                    "id": "mappinginequality-pmtiles",
-                    "display_name": "HOLC Redlining Grades (1930s)",
-                    "group": "Environmental Justice",
-                    "visible": false,
-                    "tooltip_fields": ["city", "state", "grade", "label"]
-                }
-            ]
-        },
-        {
-            "collection_id": "census-2024-county",
-            "preload": true,
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2024/county/stac-collection.json",
-            "group": { "name": "Political Boundaries", "collapsed": false },
-            "assets": [
-                {
-                    "id": "county-pmtiles",
-                    "alias": "census-county-pmtiles",
-                    "display_name": "California Counties",
-                    "group": "Political Boundaries",
-                    "visible": false,
-                    "default_filter": ["==", ["get", "STATEFP"], "06"],
-                    "tooltip_fields": ["NAMELSAD", "NAME", "GEOID"]
-                }
-            ]
-        },
-        {
-            "collection_id": "census-2024-cd",
-            "preload": true,
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2024/cd/stac-collection.json",
-            "group": { "name": "Political Boundaries", "collapsed": false },
-            "assets": [
-                {
-                    "id": "cd-pmtiles",
-                    "display_name": "Congressional Districts",
-                    "group": "Political Boundaries",
-                    "visible": false,
-                    "default_filter": ["==", ["get", "STATEFP"], "06"],
-                    "tooltip_fields": ["NAMELSAD", "GEOID", "STATEFP"]
-                }
-            ]
-        },
-        {
-            "collection_id": "census-2025-sldu",
-            "preload": true,
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2025/sldu/stac-collection.json",
-            "group": { "name": "Political Boundaries", "collapsed": false },
-            "assets": [
-                {
-                    "id": "sldu-pmtiles",
-                    "display_name": "CA Senate Districts",
-                    "group": "Political Boundaries",
-                    "visible": false,
-                    "default_filter": ["==", ["get", "STATEFP"], "06"],
-                    "tooltip_fields": ["NAMELSAD", "GEOID", "SLDUST"]
-                }
-            ]
-        },
-        {
-            "collection_id": "census-2025-sldl",
-            "preload": true,
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2025/sldl/stac-collection.json",
-            "group": { "name": "Political Boundaries", "collapsed": false },
-            "assets": [
-                {
-                    "id": "sldl-pmtiles",
-                    "display_name": "CA Assembly Districts",
-                    "group": "Political Boundaries",
-                    "visible": false,
-                    "default_filter": ["==", ["get", "STATEFP"], "06"],
-                    "tooltip_fields": ["NAMELSAD", "GEOID", "SLDLST"]
-                }
-            ]
-        },
-        {
-            "collection_id": "conservation-almanac-2024-sites",
-            "preload": true,
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/conservation-almanac-2024-sites/stac-collection.json",
-            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
-            "assets": [
-                {
-                    "id": "conservation-almanac-2024-sites-pmtiles",
-                    "display_name": "TPL Conservation Almanac",
-                    "group": "Conservation & Equity Investments",
-                    "visible": false,
-                    "tooltip_fields": ["site", "owner", "owner_type", "manager", "access_type", "purchase_type", "acres", "year", "county"]
-                }
-            ]
-        },
-        {
-            "collection_id": "landvote",
-            "preload": true,
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/landvote/stac-collection.json",
-            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
-            "assets": [
-                {
-                    "id": "landvote-pmtiles",
-                    "display_name": "Conservation Ballot Measures",
-                    "group": "Conservation & Equity Investments",
-                    "visible": false,
-                    "default_filter": ["all",
-                        ["==", ["get", "state"], "CA"],
-                        ["!=", ["get", "jurisdiction"], "State"],
-                        [">=", ["get", "year"], 2010]
-                    ],
-                    "tooltip_fields": ["municipal", "county", "year", "status", "finance_mechanism", "conservation_funds_approved", "purpose"]
-                }
-            ]
-        },
-        {
-            "collection_id": "wcb-approved-projects",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/wcb-approved-projects/stac-collection.json",
-            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
-            "assets": [
-                {
-                    "id": "wcb-approved-projects-pmtiles",
-                    "display_name": "WCB Approved Projects",
-                    "group": "Conservation & Equity Investments",
-                    "visible": false,
-                    "tooltip_fields": ["ProjName", "PrimGrante", "County", "Acres", "WCBFunding", "Type", "Program", "dtmBoardAp"]
-                }
-            ]
-        },
-        {
-            "collection_id": "cpad-units-2025b",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-cpad/cpad-units-stac-collection.json",
-            "group": { "name": "Conservation & Equity Investments", "collapsed": true },
-            "assets": [
-                {
-                    "id": "units-pmtiles",
-                    "display_name": "CPAD Protected Areas",
-                    "group": "Conservation & Equity Investments",
-                    "visible": false,
-                    "tooltip_fields": ["UNIT_NAME", "AGNCY_NAME", "ACCESS_TYP", "ACRES"]
-                }
-            ]
-        },
-        {
-            "collection_id": "irrecoverable-carbon",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-carbon/stac-collection.json",
-            "group": { "name": "Environmental Co-benefits", "collapsed": true },
-            "assets": [
-                {
-                    "id": "v2-irrecoverable-2024-cog",
-                    "display_name": "Irrecoverable Carbon (2024)",
-                    "group": "Environmental Co-benefits",
-                    "visible": false
-                }
-            ]
-        },
-        {
-            "collection_id": "calfire-2025-firep",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-fire/calfire-2025/firep/stac-collection.json",
-            "group": { "name": "Environmental Co-benefits", "collapsed": true },
-            "assets": [
-                {
-                    "id": "firep-pmtiles",
-                    "display_name": "Wildfire Perimeters",
-                    "group": "Environmental Co-benefits",
-                    "visible": false,
-                    "default_filter": [">=", ["get", "YEAR_"], 2000],
-                    "tooltip_fields": ["FIRE_NAME", "YEAR_", "GIS_ACRES", "AGENCY", "CAUSE"]
-                }
-            ]
-        },
-        {
-            "collection_id": "wetlands-nwi",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-wetlands/nwi/stac-collection.json",
-            "group": { "name": "Environmental Co-benefits", "collapsed": true },
-            "assets": [
-                {
-                    "id": "nwi-pmtiles",
-                    "display_name": "NWI Wetlands",
-                    "group": "Environmental Co-benefits",
-                    "visible": false,
-                    "tooltip_fields": ["WETLAND_TYPE", "ATTRIBUTE", "state_code"]
-                }
-            ]
-        },
-        {
-            "collection_id": "usfws-critical-habitat-final",
-            "collection_url": "https://s3-west.nrp-nautilus.io/public-usfws/critical-habitat/final/stac-collection.json",
-            "group": { "name": "Environmental Co-benefits", "collapsed": true },
-            "assets": [
-                {
-                    "id": "final-pmtiles",
-                    "display_name": "USFWS Critical Habitat",
-                    "group": "Environmental Co-benefits",
-                    "visible": false,
-                    "tooltip_fields": ["comname", "sciname", "listing_st", "unitname", "status", "pubdate"]
-                }
-            ]
-        }
+  "catalog": "https://s3-west.nrp-nautilus.io/public-data/stac/catalog.json",
+  "titiler_url": "https://titiler.nrp-nautilus.io",
+  "auto_approve": true,
+  "links": {
+    "github": "https://github.com/boettiger-lab/calenviroscreen",
+    "docs": "/about.html",
+    "carbon": true
+  },
+  "sidebar": {
+    "enabled": true,
+    "chat_title": "CalEnviroScreen Assistant"
+  },
+  "view": {
+    "center": [
+      -119.5,
+      37.5
+    ],
+    "zoom": 6
+  },
+  "welcome": {
+    "message": "Hi! Start simple — re-color, filter, or zoom the map by clicking a quick example below. Then dig deeper into intersections between environmental burden and environmental co-benefits (carbon, fire, biodiversity, wetlands) — the kind of question the official OEHHA viewer doesn't answer.",
+    "examples": [
+      "Re-color CalEnviroScreen by PM2.5 percentile to see where air pollution is worst.",
+      "Filter CalEnviroScreen to the top 10% of tracts for asthma ER visits.",
+      "Zoom to Fresno County.",
+      "Where do California's irrecoverable-carbon hotspots overlap with high-CES tracts — places where climate stewardship and EJ goals align?",
+      "Which CES tracts have been burned by CAL FIRE wildfires since 2015, and how does burned acreage compare across CES burden quintiles?",
+      "Where do USFWS critical-habitat designations overlap high-CES tracts — opportunities for multi-benefit conservation?",
+      "Show NWI wetlands within or adjacent to high-CES tracts in the Central Valley — candidate sites for nature-based restoration in burdened communities."
     ]
+  },
+  "collections": [
+    {
+      "collection_id": "calenviroscreen-5-0",
+      "preload": true,
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-calenviroscreen/stac-collection.json",
+      "group": {
+        "name": "Environmental Justice",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "ces5-pmtiles",
+          "display_name": "CalEnviroScreen 5.0",
+          "group": "Environmental Justice",
+          "visible": true,
+          "tooltip_fields": [
+            "tract",
+            "county",
+            "ZIP",
+            "CIscore",
+            "CIscore_Pctl",
+            "Pollution_Pctl",
+            "PopChar_Pctl"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "ca-dac-eda-2023",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-ca-dac/stac-collection.json",
+      "group": {
+        "name": "Environmental Justice",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "dac-tract-pmtiles",
+          "display_name": "CA Disadvantaged Communities (DWR 2023, tract)",
+          "group": "Environmental Justice",
+          "visible": false,
+          "tooltip_fields": [
+            "GEOID20",
+            "DAC23",
+            "MHI23",
+            "Pop23"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "svi-2022",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-social-vulnerability/2022/stac-collection.json",
+      "group": {
+        "name": "Environmental Justice",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "tract-pmtiles",
+          "display_name": "CDC Social Vulnerability Index (tract)",
+          "group": "Environmental Justice",
+          "visible": false,
+          "default_filter": [
+            "==",
+            [
+              "get",
+              "ST_ABBR"
+            ],
+            "CA"
+          ],
+          "tooltip_fields": [
+            "COUNTY",
+            "FIPS",
+            "RPL_THEMES",
+            "ST_ABBR"
+          ]
+        },
+        {
+          "id": "county-pmtiles",
+          "display_name": "CDC Social Vulnerability Index (county)",
+          "group": "Environmental Justice",
+          "visible": false,
+          "default_filter": [
+            "==",
+            [
+              "get",
+              "ST_ABBR"
+            ],
+            "CA"
+          ],
+          "tooltip_fields": [
+            "COUNTY",
+            "FIPS",
+            "RPL_THEMES",
+            "ST_ABBR"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "mappinginequality",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-mappinginequality/stac-collection.json",
+      "group": {
+        "name": "Environmental Justice",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "mappinginequality-pmtiles",
+          "display_name": "HOLC Redlining Grades (1930s)",
+          "group": "Environmental Justice",
+          "visible": false,
+          "tooltip_fields": [
+            "city",
+            "state",
+            "grade",
+            "label"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "census-2024-county",
+      "preload": true,
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2024/county/stac-collection.json",
+      "group": {
+        "name": "Political Boundaries",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "county-pmtiles",
+          "alias": "census-county-pmtiles",
+          "display_name": "California Counties",
+          "group": "Political Boundaries",
+          "visible": false,
+          "default_filter": [
+            "==",
+            [
+              "get",
+              "STATEFP"
+            ],
+            "06"
+          ],
+          "tooltip_fields": [
+            "NAMELSAD",
+            "NAME",
+            "GEOID"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "census-2024-cd",
+      "preload": true,
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2024/cd/stac-collection.json",
+      "group": {
+        "name": "Political Boundaries",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "cd-pmtiles",
+          "display_name": "Congressional Districts",
+          "group": "Political Boundaries",
+          "visible": false,
+          "default_filter": [
+            "==",
+            [
+              "get",
+              "STATEFP"
+            ],
+            "06"
+          ],
+          "tooltip_fields": [
+            "NAMELSAD",
+            "GEOID",
+            "STATEFP"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "census-2025-sldu",
+      "preload": true,
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2025/sldu/stac-collection.json",
+      "group": {
+        "name": "Political Boundaries",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "sldu-pmtiles",
+          "display_name": "CA Senate Districts",
+          "group": "Political Boundaries",
+          "visible": false,
+          "default_filter": [
+            "==",
+            [
+              "get",
+              "STATEFP"
+            ],
+            "06"
+          ],
+          "tooltip_fields": [
+            "NAMELSAD",
+            "GEOID",
+            "SLDUST"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "census-2025-sldl",
+      "preload": true,
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-census/census-2025/sldl/stac-collection.json",
+      "group": {
+        "name": "Political Boundaries",
+        "collapsed": false
+      },
+      "assets": [
+        {
+          "id": "sldl-pmtiles",
+          "display_name": "CA Assembly Districts",
+          "group": "Political Boundaries",
+          "visible": false,
+          "default_filter": [
+            "==",
+            [
+              "get",
+              "STATEFP"
+            ],
+            "06"
+          ],
+          "tooltip_fields": [
+            "NAMELSAD",
+            "GEOID",
+            "SLDLST"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "conservation-almanac-2024-sites",
+      "preload": true,
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/conservation-almanac-2024-sites/stac-collection.json",
+      "group": {
+        "name": "Conservation & Equity Investments",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "conservation-almanac-2024-sites-pmtiles",
+          "display_name": "TPL Conservation Almanac",
+          "group": "Conservation & Equity Investments",
+          "visible": false,
+          "tooltip_fields": [
+            "site",
+            "owner",
+            "owner_type",
+            "manager",
+            "access_type",
+            "purchase_type",
+            "acres",
+            "year",
+            "county"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "landvote",
+      "preload": true,
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/landvote/stac-collection.json",
+      "group": {
+        "name": "Conservation & Equity Investments",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "landvote-pmtiles",
+          "display_name": "Conservation Ballot Measures",
+          "group": "Conservation & Equity Investments",
+          "visible": false,
+          "default_filter": [
+            "all",
+            [
+              "==",
+              [
+                "get",
+                "state"
+              ],
+              "CA"
+            ],
+            [
+              "!=",
+              [
+                "get",
+                "jurisdiction"
+              ],
+              "State"
+            ],
+            [
+              ">=",
+              [
+                "get",
+                "year"
+              ],
+              2010
+            ]
+          ],
+          "tooltip_fields": [
+            "municipal",
+            "county",
+            "year",
+            "status",
+            "finance_mechanism",
+            "conservation_funds_approved",
+            "purpose"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "wcb-approved-projects",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-tpl/wcb-approved-projects/stac-collection.json",
+      "group": {
+        "name": "Conservation & Equity Investments",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "wcb-approved-projects-pmtiles",
+          "display_name": "WCB Approved Projects",
+          "group": "Conservation & Equity Investments",
+          "visible": false,
+          "tooltip_fields": [
+            "ProjName",
+            "PrimGrante",
+            "County",
+            "Acres",
+            "WCBFunding",
+            "Type",
+            "Program",
+            "dtmBoardAp"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "cpad-units-2025b",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-cpad/cpad-units-stac-collection.json",
+      "group": {
+        "name": "Conservation & Equity Investments",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "units-pmtiles",
+          "display_name": "CPAD Protected Areas",
+          "group": "Conservation & Equity Investments",
+          "visible": false,
+          "tooltip_fields": [
+            "UNIT_NAME",
+            "AGNCY_NAME",
+            "ACCESS_TYP",
+            "ACRES"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "irrecoverable-carbon",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-carbon/stac-collection.json",
+      "group": {
+        "name": "Environmental Co-benefits",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "v2-irrecoverable-2024-cog",
+          "display_name": "Irrecoverable Carbon (2024)",
+          "group": "Environmental Co-benefits",
+          "visible": false
+        }
+      ]
+    },
+    {
+      "collection_id": "calfire-2025-firep",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-fire/calfire-2025/firep/stac-collection.json",
+      "group": {
+        "name": "Environmental Co-benefits",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "firep-pmtiles",
+          "display_name": "Wildfire Perimeters",
+          "group": "Environmental Co-benefits",
+          "visible": false,
+          "default_filter": [
+            ">=",
+            [
+              "get",
+              "YEAR_"
+            ],
+            2000
+          ],
+          "tooltip_fields": [
+            "FIRE_NAME",
+            "YEAR_",
+            "GIS_ACRES",
+            "AGENCY",
+            "CAUSE"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "wetlands-nwi",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-wetlands/nwi/stac-collection.json",
+      "group": {
+        "name": "Environmental Co-benefits",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "nwi-pmtiles",
+          "display_name": "NWI Wetlands",
+          "group": "Environmental Co-benefits",
+          "visible": false,
+          "tooltip_fields": [
+            "WETLAND_TYPE",
+            "ATTRIBUTE",
+            "state_code"
+          ]
+        }
+      ]
+    },
+    {
+      "collection_id": "usfws-critical-habitat-final",
+      "collection_url": "https://s3-west.nrp-nautilus.io/public-usfws/critical-habitat/final/stac-collection.json",
+      "group": {
+        "name": "Environmental Co-benefits",
+        "collapsed": true
+      },
+      "assets": [
+        {
+          "id": "final-pmtiles",
+          "display_name": "USFWS Critical Habitat",
+          "group": "Environmental Co-benefits",
+          "visible": false,
+          "tooltip_fields": [
+            "comname",
+            "sciname",
+            "listing_st",
+            "unitname",
+            "status",
+            "pubdate"
+          ]
+        }
+      ]
+    }
+  ],
+  "plugins": [
+    {
+      "url": "https://cdn.jsdelivr.net/gh/SchmidtDSE/glen@v4.0.0/core/plugins/mcp.js",
+      "options": {
+        "url": "https://duckdb-mcp.nrp-nautilus.io/mcp",
+        "prompt": "geospatial-analyst"
+      }
+    },
+    "https://cdn.jsdelivr.net/gh/SchmidtDSE/glen@v4.0.0/core/plugins/hex.js"
+  ]
 }
